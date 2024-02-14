@@ -1,7 +1,7 @@
 const express = require('express');
-const { ApolloServer } = require('@apollo/server');
-const { expressMiddleware } = require('@apollo/server/express4');
-const cors = require('cors');  
+const { ApolloServer } = require('apollo-server-express'); 
+const { expressMiddleware } = require('apollo-server-express'); 
+const cors = require('cors');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 require('dotenv').config();
@@ -16,17 +16,15 @@ const server = new ApolloServer({
   resolvers,
 });
 
-
 const startApolloServer = async () => {
   await server.start();
-  await connectDB(); 
+  await connectDB();
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  app.use(cors());  
+  app.use(cors());
 
-  
   app.use('/images', express.static(path.join(__dirname, '../client/public/images')));
 
   app.use('/graphql', expressMiddleware(server, {
@@ -46,6 +44,5 @@ const startApolloServer = async () => {
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
 };
-
 
 startApolloServer();
