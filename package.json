@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install-all": "cd server && npm install && cd ../client && npm install",
     "start": "node server/server.js",
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
-    "postinstall": "cd client && npm install && npm run build",
+    "setup": "cd server && npm i && cd ../client && npm i",
+    "build-site": "cd client && npm run build && cd ../server && npm run start",
     "watch": "nodemon server/server.js",
-    "build": "cd client && npm run build"
+    "render-build": "cd client && npm run build"
+    
   },
   "keywords": [],
   "author": "",
@@ -23,14 +26,14 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "react-icons": "^5.0.1",
-    "react-router-dom": "^6.22.0"
+    "react-router-dom": "^6.22.0",
+    "vite": "^5.0.12"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.3",
     "postcss": "^8.4.33",
-    "tailwindcss": "^3.4.1",
-    "vite": "^5.0.8"
+    "tailwindcss": "^3.4.1"
   }
 }
