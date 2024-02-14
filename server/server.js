@@ -18,8 +18,8 @@ const server = new ApolloServer({
 });
 
 const startApolloServer = async () => {
+  await connectDB(); 
   await server.start();
-  await connectDB();
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
@@ -42,7 +42,6 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
-
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
