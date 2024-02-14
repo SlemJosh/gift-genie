@@ -65,11 +65,6 @@ const WelcomePage = () => {
           <p className="text-lg text-gray-800 mb-4">
             Click on the lamp to begin the search for the perfect gift.
           </p>
-          {showPrompt && (
-            <p className="text-lg text-red-600 animate-bounce">
-              {promptMessage}
-            </p>
-          )}
         </div>
         <div className="flex justify-center mb-8">
           <div className="relative animate-bounce mb-8">
@@ -82,6 +77,11 @@ const WelcomePage = () => {
             />
           </div>
         </div>
+        {showPrompt && (
+            <p className="text-lg text-red-600 animate-bounce">
+              {promptMessage}
+            </p>
+          )}
         <div className="text-center mt-4">
           {AuthService.loggedIn() ? (
             <>
