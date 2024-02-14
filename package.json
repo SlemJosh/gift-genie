@@ -8,7 +8,8 @@
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
     "postinstall": "cd client && npm install && npm run build",
     "watch": "nodemon server/server.js",
-    "build": "concurrently \"cd server && npm install\" \"cd client && npm install && npm run build\""
+    "prebuild": "cd server && npm install",
+    "build": "cd client && npm install && npm run build"
   },
 
   "keywords": [],
