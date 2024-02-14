@@ -1,6 +1,5 @@
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express'); 
-const { expressMiddleware } = require('apollo-server-express'); 
+const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
@@ -14,6 +13,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cache: 'bounded', 
 });
 
 const startApolloServer = async () => {
@@ -27,7 +27,11 @@ const startApolloServer = async () => {
 
   app.use('/images', express.static(path.join(__dirname, '../client/public/images')));
 
-  app.use('/graphql', expressMiddleware(server, {
+ 
+  app.use('/graphql', server.getMiddleware({
+    path: '/graphql',
+    cors: false, 
+    bodyParserConfig: true, 
     context: authMiddleware
   }));
 
