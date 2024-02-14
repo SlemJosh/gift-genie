@@ -8,11 +8,9 @@ require('dotenv').config();
 const { typeDefs, resolvers } = require('./graphql');
 const connectDB = require('./config/connection');
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`API server running on port ${PORT}!`);
-});
 const app = express();
+
+const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -30,7 +28,6 @@ const startApolloServer = async () => {
 
   app.use('/images', express.static(path.join(__dirname, '../client/public/images')));
 
- 
   app.use('/graphql', server.getMiddleware({
     path: '/graphql',
     cors: false, 
@@ -45,6 +42,7 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
+
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
